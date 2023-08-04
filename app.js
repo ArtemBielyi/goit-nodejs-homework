@@ -3,15 +3,7 @@ const logger = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
 
-// const mongoose = require("mongoose");
-
-// const DB_HOST =
-//   "mongodb+srv://ArtemBielyi:25091992@cluster1.rq6z8r3.mongodb.net/db-contacts?retryWrites=true&w=majority";
-
-// mongoose
-//   .connect(DB_HOST)
-//   .then(() => console.log("Database connect succes"))
-//   .catch((error) => console.log(error.message));
+const authRouter = require("./routes/api/auth");
 
 const contactsRouter = require("./routes/api/contacts");
 
@@ -24,6 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/contacts", contactsRouter);
+app.use("/api/auth", authRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
@@ -35,3 +28,13 @@ app.use((err, req, res, next) => {
 });
 
 module.exports = app;
+
+// const mongoose = require("mongoose");
+
+// const DB_HOST =
+//   "mongodb+srv://ArtemBielyi:25091992@cluster1.rq6z8r3.mongodb.net/db-contacts?retryWrites=true&w=majority";
+
+// mongoose
+//   .connect(DB_HOST)
+//   .then(() => console.log("Database connect succes"))
+//   .catch((error) => console.log(error.message));
